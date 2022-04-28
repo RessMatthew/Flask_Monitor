@@ -1,13 +1,20 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: wgj
+  Date: 2022/4/27
+  Time: 23:00
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <link rel="stylesheet" href="css/login.css">
-  </head>
+  <link rel="stylesheet" href="css/login.css">
+</head>
   <body>
   <div class="container">
     <div class="form-box">
