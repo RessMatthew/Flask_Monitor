@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\demo\templates\login.jsp">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\demo\test.py">
           <value>
             <Attribute>
