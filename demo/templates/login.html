@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <form action="#" method="post">
+        <p><input type="text" name="userName" value="userName"/></p>
+        <p><input type="text" name="passwd" value = "password"/></p>
+        <p><input type="submit" value="login"/></p>
+    </form>
+
+</body>
+</html>
