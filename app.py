@@ -1,4 +1,4 @@
-# session类似于一个字典
+﻿# session类似于一个字典
 import base64
 
 from flask import Flask, redirect, url_for, render_template, request, session, Response, flash
@@ -8,6 +8,12 @@ from camera import VideoCamera
 from faceRecogniction import recognize
 
 app = Flask(__name__)
+
+#设置SECRET_KEY
+app.config['SECRET_KEY'] = "2003052288mjp"
+
+# 设置session的有效期方式2【指session可以往后活多长时间】
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
 
 # 本地配置
@@ -46,18 +52,20 @@ app.secret_key = "2003052288mjp"
 @app.route("/login",methods=["POST", "GET"] )
 def login():
     if request.method == "POST":
+        session.permanent = True
         username = request.form["username"]
         password = request.form["password"]
+        session["user_status"] = "true"
         # 查询表里面名字等于username的
         user = User.query.filter(User.username == username).first()
         if user.password == password:
-            return redirect(url_for('user'))
+            return render_template('user.html')
         else :
             flash("密码错误，请重新输入")
-            return redirect(url_for('login'))
+            return render_template('login.html')
     else:
-        if "user" in session:
-            return redirect(url_for("user"))
+        if "user_status" in session:
+            return render_template('user.html')
         return render_template("login.html")
 
 # 注册页面
@@ -76,28 +84,26 @@ def register():
             insert = User(username=user,password=password,email=email)
             db.session.add(insert)
             db.session.commit()
-            return redirect(url_for("user"))
+            return render_template('user.html')
 
 
 @app.route("/user")
 def user():
-    if "user" in session:
-        user = session["user"]
-        password = session["password"]
-        return f"<h1>{user}{password}</h1>"
+    if "user_status" in session:
+        return render_template('user.html')
     else:
-        return redirect(url_for("login"))
+        return render_template('login.html')
 
 @app.route('/')
 def index():
     # 如果用户登录了就转到主页面，用户没有登录就转到login页面
-    if "user" in session:
+    if "user_status" in session:
         return render_template('index.html')
-    return redirect(url_for("login"))
+    return render_template('login.html')
 
 
 @app.route("/put_data",methods = ["GET","POST"])
-def hello():
+def face_recognize():
     if request.method == "POST":
         imgData = request.form.get("myimg")
     # 因为imgData是base64的数据，要把它转为ndarray
@@ -110,9 +116,10 @@ def hello():
         local_face = "D:/face_recognize/pic/local_face.png"
         rec = recognize()
         score = rec.analyse_img(file1 = user_face,file2 = local_face)
-        if(score>90):
+        if score>90:
             print("true")
-            return redirect("user",code=302)
+            session["user_status"] = "true"
+            return render_template('videoCamera.html', result = "true")
         else:
             print("false")
 
