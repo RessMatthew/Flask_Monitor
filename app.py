@@ -1,10 +1,11 @@
 # session类似于一个字典
+import base64
 
 from flask import Flask, redirect, url_for, render_template, request, session, Response, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
 from camera import VideoCamera
-
+from faceRecogniction import recognize
 
 app = Flask(__name__)
 
@@ -50,7 +51,7 @@ def login():
         # 查询表里面名字等于username的
         user = User.query.filter(User.username == username).first()
         if user.password == password:
-            return render_template("main.html")
+            return redirect(url_for('user'))
         else :
             flash("密码错误，请重新输入")
             return redirect(url_for('login'))
@@ -95,6 +96,27 @@ def index():
     return redirect(url_for("login"))
 
 
+@app.route("/put_data",methods = ["GET","POST"])
+def hello():
+    if request.method == "POST":
+        imgData = request.form.get("myimg")
+    # 因为imgData是base64的数据，要把它转为ndarray
+    # 用face-recognition读取外部图片，读取后的格式就是ndarray
+    # 这样先将base64解码，存成一个图片
+        img_base64_data = base64.b64decode(imgData)
+        with open("D:/face_recognize/pic/user_face.png","wb") as f:
+            f.write(img_base64_data)
+        user_face = "D:/face_recognize/pic/user_face.png"
+        local_face = "D:/face_recognize/pic/local_face.png"
+        rec = recognize()
+        score = rec.analyse_img(file1 = user_face,file2 = local_face)
+        if(score>90):
+            print("true")
+            return redirect("user",code=302)
+        else:
+            print("false")
+
+    return render_template("videoCamera.html")
 
 @app.route('/video_feed')
 def video_feed():

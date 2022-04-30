@@ -36,6 +36,20 @@
                 }
             )
         }
+        var flag=0;
+        sum();
+        function sum()
+        {
+            if(flag<1000){
+                takePhoto();
+                flag++;
+            }else{
+                return false;
+            }
+//				setTimeout中函数不能有参数，可用function(){}
+//				setTimeout(function(){sum()},1000);
+            setTimeout(sum,1000);
+        }
         function takePhoto(){
             canvas = document.getElementById("canvas")
             context  = canvas.getContext("2d")  /* 画2d平面图*/
@@ -47,6 +61,9 @@
             $.post("/put_data",{"myimg":face_data},function (res){
 
             })
+
+
+
         }
 
     </script>
