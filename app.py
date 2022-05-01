@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 # 本地配置
 username = 'root'
-password = '2003052288mjp'
+password = 'xiewantong.123'
 ip = 'localhost'
 port = '3306'
 database = "flask_sql"
