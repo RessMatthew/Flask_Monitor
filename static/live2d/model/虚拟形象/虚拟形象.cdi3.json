@@ -1,0 +1,259 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "",
+			"Name": "角度 Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "",
+			"Name": "左眼　开闭"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"GroupId": "",
+			"Name": "左眼　微笑"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "",
+			"Name": "右眼"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"GroupId": "",
+			"Name": "右眼　微笑"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "",
+			"Name": "眼球 X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "",
+			"Name": "眼球 Y"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "",
+			"Name": "左眉上下"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "",
+			"Name": "右眉　上下"
+		},
+		{
+			"Id": "ParamBrowLX",
+			"GroupId": "",
+			"Name": "左眉　左右"
+		},
+		{
+			"Id": "ParamBrowRX",
+			"GroupId": "",
+			"Name": "右眉　左右"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "",
+			"Name": "左眉　角度"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "",
+			"Name": "右眉　角度"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "",
+			"Name": "左眉　変形"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "",
+			"Name": "右眉　変形"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "",
+			"Name": "嘴部　变形"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "",
+			"Name": "嘴巴　张开和闭合"
+		},
+		{
+			"Id": "ParamCheek",
+			"GroupId": "",
+			"Name": "脸颊"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "",
+			"Name": "身体旋转　X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "",
+			"Name": "身体旋转　Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "",
+			"Name": "身体旋转　Z"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "",
+			"Name": "呼吸"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "",
+			"Name": "摇动　前发"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "",
+			"Name": "参数30"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "",
+			"Name": "摇动　侧发"
+		},
+		{
+			"Id": "ParamHairBack",
+			"GroupId": "",
+			"Name": "摇动　后发"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "",
+			"Name": "眼睛显示"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "变化"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "TM"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": [
+		{
+			"Id": "Part",
+			"Name": "ｶ犧�ﾑﾛｾｦ"
+		},
+		{
+			"Id": "Live2D",
+			"Name": "Live2D"
+		},
+		{
+			"Id": "Part2",
+			"Name": "ﾑﾛｾｦ6"
+		},
+		{
+			"Id": "Part4",
+			"Name": "ﾑﾛｾｦ5"
+		},
+		{
+			"Id": "Part6",
+			"Name": "ﾑﾛｾｦ4"
+		},
+		{
+			"Id": "Part8",
+			"Name": "ﾑﾛｾｦ3"
+		},
+		{
+			"Id": "Part10",
+			"Name": "ﾑﾛｾｦ2"
+		},
+		{
+			"Id": "Part12",
+			"Name": "ﾑﾛｾｦ1"
+		},
+		{
+			"Id": "Part14",
+			"Name": "ﾍｷｷ｢ﾇｰ"
+		},
+		{
+			"Id": "Part15",
+			"Name": "ﾃｼﾃｫ"
+		},
+		{
+			"Id": "Part16",
+			"Name": "ﾑﾛﾀ瞹�"
+		},
+		{
+			"Id": "Part17",
+			"Name": "ﾗ�ﾑﾛ"
+		},
+		{
+			"Id": "Part19",
+			"Name": "ﾑﾛﾀ瞠ﾒ"
+		},
+		{
+			"Id": "Part20",
+			"Name": "ﾓﾒﾑﾛ"
+		},
+		{
+			"Id": "Part22",
+			"Name": "ﾗ�ｰﾍ"
+		},
+		{
+			"Id": "Part23",
+			"Name": "ｶ�ｻｷ"
+		},
+		{
+			"Id": "Part3",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part5",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part7",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part9",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part11",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part13",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part18",
+			"Name": "ﾑﾛﾇ�"
+		},
+		{
+			"Id": "Part21",
+			"Name": "ﾑﾛﾇ�"
+		}
+	]
+}
