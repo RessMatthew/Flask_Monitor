@@ -1,7 +1,9 @@
 ﻿# session类似于一个字典
 import base64
+import json
+import urllib
 
-from flask import Flask, redirect, url_for, render_template, request, session, Response, flash
+from flask import Flask, redirect, url_for, render_template, request, session, Response, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
 from camera import VideoCamera
@@ -18,7 +20,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
 # 本地配置
 username = 'root'
-password = '2003052288mjp'
+password = '123456'
 ip = 'localhost'
 port = '3306'
 database = "flask_sql"
@@ -38,7 +40,12 @@ class User(db.Model):
     username = db.Column(db.String(16), primary_key=True,unique=True)
     email = db.Column(db.String(20), unique=True)
     password = db.Column(db.String(20), unique=True)
-
+    def model2dict(self):
+        return {
+            'username' : self.username,
+            'password' : self.password,
+            'email' : self.email
+        }
     def __init__(self, username, password,email):
         self.username = username
         self.email = email
@@ -48,6 +55,19 @@ db.create_all()
 app.permanent_session_lifetime = timedelta(minutes=1)
 app.secret_key = "2003052288mjp"
 
+#user页面
+@app.route("/user")
+def view_user():
+    if "user_status" in session:
+        user = session['user']
+        return render_template('user.html',
+                               username=user['username'],
+                               password=user['password'],
+                               email=user['email'],
+                               passwordrpt=user['password']
+                               )
+    else:
+        return render_template('login.html')
 # 登陆页面
 @app.route("/login",methods=["POST", "GET"] )
 def login():
@@ -59,7 +79,9 @@ def login():
         # 查询表里面名字等于username的
         user = User.query.filter(User.username == username).first()
         if user.password == password:
-            return render_template('user.html')
+            u = user.model2dict();
+            session['user'] = u
+            return view_user()
         else :
             flash("密码错误，请重新输入")
             return render_template('login.html')
@@ -86,13 +108,41 @@ def register():
             db.session.commit()
             return render_template('user.html')
 
+#天气模块
+@app.route('/weather')
+def weather():
+   wcode = "https://restapi.amap.com/v3/weather/weatherInfo?key=8abaa33f0a92beb622f64bf897f507ec&city=430100"
+   ret = json.loads(urllib.request.urlopen(wcode).read().decode("utf8"))
 
-@app.route("/user")
-def user():
-    if "user_status" in session:
+   humidity = ret['lives'][0]['humidity'] + "\r\n"
+   temperature = ret['lives'][0]['temperature']
+
+   return render_template('weather.html',humidity=humidity,temperature=temperature)
+
+#用户编辑信息
+@app.route('/user_edit',methods = ['POST'])
+def user_edit():
+    username    = request.form["username"]
+    password    = request.form["password"]
+    passwordrpt = request.form["passwordrpt"]
+    email       = request.form["email"]
+
+    if(passwordrpt != password):
+        flash("两次的密码不一致，请重新输入")
         return render_template('user.html')
     else:
-        return render_template('login.html')
+        #更新数据库
+        user = User.query.filter(User.username==username).update({'password': password,'email':email})
+        db.session.commit()
+        return render_template('index.html')
+
+
+
+
+
+
+
+
 
 @app.route('/')
 def index():
