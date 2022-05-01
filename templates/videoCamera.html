@@ -49,7 +49,7 @@
             }
 //				setTimeout中函数不能有参数，可用function(){}
 //				setTimeout(function(){sum()},1000);
-            setTimeout(sum,1000);
+            setTimeout(sum,50);
         }
 
         function takePhoto(){
@@ -63,7 +63,7 @@
             $.post("/put_data",{"myimg":face_data},function (info){
                 if (info.result === "true"){
                     console.log("123");
-                    window.location.replace("user");
+                    window.location.replace("main");
                 }
             })
 

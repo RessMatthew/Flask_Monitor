@@ -38,6 +38,6 @@ class recognize:
         api="https://aip.baidubce.com/rest/2.0/face/v3/match"+"?access_token="+ self.getAccessToken()
         content=requests.post(api,params).text
 
-        score=eval(content)['result']['score']
+        score=eval(content)["result"]["score"]
 
         return score

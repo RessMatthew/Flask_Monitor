@@ -3,7 +3,6 @@ import base64
 import json
 import urllib
 
-
 from flask import Flask, redirect, url_for, render_template, request, session, Response, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
@@ -19,10 +18,9 @@ app.config['SECRET_KEY'] = "2003052288mjp"
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
 
-
 # 本地配置
 username = 'root'
-password = 'xiewantong.123'
+password = '2003052288mjp'
 ip = 'localhost'
 port = '3306'
 database = "flask_sql"
@@ -81,7 +79,7 @@ def login():
         # 查询表里面名字等于username的
         user = User.query.filter(User.username == username).first()
         if user.password == password:
-            u = user.model2dict();
+            u = user.model2dict()
             session['user'] = u
             return view_user()
         else :
@@ -138,19 +136,24 @@ def user_edit():
         db.session.commit()
         return render_template('index.html')
 
-
-
-
-
-
-
-
+# 这是新增的live2d功能
+@app.route("/live2d", methods=["POST", "GET"])
+def live2d():
+    data = {'nickname': '虚拟形象'} # fake user
+    return render_template("live2d.html", user=data)
 
 @app.route('/')
 def index():
     # 如果用户登录了就转到主页面，用户没有登录就转到login页面
     if "user_status" in session:
         return render_template('index.html')
+    return render_template('login.html')
+
+@app.route('/main')
+def main():
+    # 如果用户登录了就转到主页面，用户没有登录就转到login页面
+    if "user_status" in session:
+        return render_template('main.html')
     return render_template('login.html')
 
 
