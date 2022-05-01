@@ -6,6 +6,8 @@ import urllib
 from flask import Flask, redirect, url_for, render_template, request, session, Response, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
+
+import sendMessage
 from camera import VideoCamera
 from faceRecogniction import recognize
 
@@ -160,6 +162,12 @@ def main():
 @app.route('/viewMonitor')
 def view_monitor():
     return render_template('index.html')
+
+#当陌生人闯入宿舍时发送短信
+@app.route('/sendErrorMessage')
+def sendErrorMessage():
+    content = '【Warning!!!】有陌生人到达宿舍，请警惕!!!!!。'
+    sendMessage.sendMES(content)
 
 @app.route("/put_data",methods = ["GET","POST"])
 def face_recognize():

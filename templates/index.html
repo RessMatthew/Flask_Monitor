@@ -70,13 +70,64 @@
 
 {#监控信息#}
     <div class="container__monitor">
-        <img src="{{ url_for('video_feed') }}">
-        <style>
-            *{padding: 0; margin: 0}
-            img{ width: 400px; height: 400px; }
-        </style>
+         <canvas width="300" height="300" id = "face_recognize">
+              <video width="300" height="300" id = "myvideo"></video>
+          </canvas>    <!--画布-->
+          <!--canvas不能用CSS修饰，用CSS修饰宽高只是拉伸，并没有对内容进行适应-->
     </div>
+        <script>
+        openCamera();
+        myvideo = document.getElementById("myvideo")        /* 通过id取出myvideo元素*/
+        function openCamera(){
+            cons = {
+                video:{
+                    width:300,
+                    height:300
+                }
+            }
+            /* 取电脑的摄像头*/
+            video = navigator.mediaDevices.getUserMedia(cons)
+            /* 将myvideo标签与硬件摄像头相关联*/
+            video.then(
+                function (videoStream){
+                    myvideo.srcObject = videoStream
+                    myvideo.play()  /*play() 方法开始播放当前的音频或视频。*/
+                }
+            )
+        }
 
+        var flag=0;
+        sum();
+        function sum()
+        {
+            if(flag<1000){
+                takePhoto();
+                flag++;
+            }else{
+                return false;
+            }
+    //				setTimeout中函数不能有参数，可用function(){}
+    //				setTimeout(function(){sum()},1000);
+            setTimeout(sum,50);
+        }
+
+        function takePhoto(){
+            canvas = document.getElementById("face_recognize")
+            context  = canvas.getContext("2d")  /* 画2d平面图*/
+            context.drawImage(myvideo,0,0,300,300)  /* 图片，x，y，宽，高*/
+            /* 用jquery的ajax技术实现前后端的通信*/
+            face_data = canvas.toDataURL()      /* 把canvas里的图打印成数据*/
+            face_data = face_data.substring(22)     /* 因为前22位数字是描述信息，不必上传*/
+            /* data:image/png;base64,*/
+            $.post("/put_data",{"myimg":face_data},function (info){
+                if (info.result === "true"){
+                    console.log("123");
+                    window.location.replace("main");
+                }
+            })}
+
+
+    </script>
 
     <script type="text/javascript">
         function viewVideo() {

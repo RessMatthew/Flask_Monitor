@@ -4,7 +4,7 @@ import urllib.request
 import hashlib
 
 
-def sendMES():
+def sendMES(content):
     statusStr = {
         '0': '短信发送成功',
         '-1': '参数不全',
@@ -24,8 +24,7 @@ def sendMES():
     m = hashlib.md5()
     m.update('2003052288mjp'.encode("utf8"))
     password = m.hexdigest()
-    # 要发送的短信内容
-    content = '【宿舍监控系统】已到达就寝时间，请及时熄灯入睡。'
+    # 要发送的短信内容在变量中给出了
     # 要发送短信的手机号码
     phone = '18390816537'
 
