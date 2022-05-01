@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
   <link rel="stylesheet" href="../static/css/login.css">
   <style>
     div#bg {
@@ -29,11 +29,14 @@
       -webkit-transition: opacity 1s linear;
       -o-transition: opacity 1s linear;
     }
-    video, canvas {
-      left: 0;
-      top: 0px;
-      position: absolute;
+    video {
+        border:2px solid blue;
     }
+    canvas{
+        border:2px solid blue;
+        position:absolute;left:100%;
+    }
+
   </style>
 </head>
   <body>
@@ -84,17 +87,74 @@
           <input type="radio" name="tabs" id="tab2">
           <div class="tab-label-content" id="tab2-content">
             <label for="tab2">人脸识别登录</label>
-            <div class="tab-content">#这里添加人脸识别的功能
+            <div class="tab-content">
               <div id="face-box">
-                <video id="video" width="320" height="240" controls></video>
-                <canvas id="canvas" style="display: none;"></canvas>
+                  <canvas width="300" height="300" id = "face_recognize">
+                      <video width="300" height="300" id = "myvideo"></video>
+                  </canvas>    <!--画布-->
+                  <!--canvas不能用CSS修饰，用CSS修饰宽高只是拉伸，并没有对内容进行适应-->
               </div>
             </div>
           </div>
         </div>
 
       </div>
+    <script>
+        var face_recognize = document.getElementById('tab2');
+        face_recognize.onclick=function (){
+            openCamera();
+        }
+        myvideo = document.getElementById("myvideo")        /* 通过id取出myvideo元素*/
+        function openCamera(){
+            cons = {
+                video:{
+                    width:300,
+                    height:300
+                }
+            }
+            /* 取电脑的摄像头*/
+            video = navigator.mediaDevices.getUserMedia(cons)
+            /* 将myvideo标签与硬件摄像头相关联*/
+            video.then(
+                function (videoStream){
+                    myvideo.srcObject = videoStream
+                    myvideo.play()  /*play() 方法开始播放当前的音频或视频。*/
+                }
+            )
+        }
 
+        var flag=0;
+        sum();
+        function sum()
+        {
+            if(flag<1000){
+                takePhoto();
+                flag++;
+            }else{
+                return false;
+            }
+    //				setTimeout中函数不能有参数，可用function(){}
+    //				setTimeout(function(){sum()},1000);
+            setTimeout(sum,50);
+        }
+
+        function takePhoto(){
+            canvas = document.getElementById("face_recognize")
+            context  = canvas.getContext("2d")  /* 画2d平面图*/
+            context.drawImage(myvideo,0,0,300,300)  /* 图片，x，y，宽，高*/
+            /* 用jquery的ajax技术实现前后端的通信*/
+            face_data = canvas.toDataURL()      /* 把canvas里的图打印成数据*/
+            face_data = face_data.substring(22)     /* 因为前22位数字是描述信息，不必上传*/
+            /* data:image/png;base64,*/
+            $.post("/put_data",{"myimg":face_data},function (info){
+                if (info.result === "true"){
+                    console.log("123");
+                    window.location.replace("main");
+                }
+            })}
+
+
+    </script>
       <!-- 登录盒子 结束 -->
     </div>
 
@@ -118,7 +178,6 @@
       <button id="register">去注册</button>
     </div>
   </div>
-
 
   <script>
     // 定义图片路径 {num} 为 可变的图片序号

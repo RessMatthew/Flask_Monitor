@@ -39,7 +39,7 @@ function hideMessage(timeout){
 
 // 工具栏的点击事件
 $('.tool .fui-home').click(function (){
-  showMessage('1', 5000, true)
+  showMessage('今天的天气是14℃，有些冷，记得增添衣物哦', 5000, true)
 });
 
 $('.tool .fui-eye').click(function (){

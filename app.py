@@ -79,17 +79,18 @@ def login():
         # 查询表里面名字等于username的
         user = User.query.filter(User.username == username).first()
         if user.password == password:
-            u = user.model2dict()
+            u = user.model2dict();
             session['user'] = u
-            return view_user()
+            return render_template("main.html")
         else :
             flash("密码错误，请重新输入")
             return render_template('login.html')
     else:
         if "user_status" in session:
-            return render_template('user.html')
+            return render_template("main.html")
+            # return render_template('user.html')
         return render_template("login.html")
-
+        # return render_template("main.html")
 # 注册页面
 @app.route("/register",methods=["POST", "GET"] )
 def register():
@@ -156,6 +157,9 @@ def main():
         return render_template('main.html')
     return render_template('login.html')
 
+@app.route('/viewMonitor')
+def view_monitor():
+    return render_template('index.html')
 
 @app.route("/put_data",methods = ["GET","POST"])
 def face_recognize():

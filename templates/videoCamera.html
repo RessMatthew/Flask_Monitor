@@ -63,6 +63,7 @@
             $.post("/put_data",{"myimg":face_data},function (info){
                 if (info.result === "true"){
                     console.log("123");
+                    /*window.alert("识别成功");*/
                     window.location.replace("main");
                 }
             })
