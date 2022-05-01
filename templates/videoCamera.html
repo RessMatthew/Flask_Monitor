@@ -60,14 +60,12 @@
             face_data = canvas.toDataURL()      /* 把canvas里的图打印成数据*/
             face_data = face_data.substring(22)     /* 因为前22位数字是描述信息，不必上传*/
             /* data:image/png;base64,*/
-            $.post("/put_data",{"myimg":face_data},function (result){
-                console.log("good")
-                if (result === "true")
-                    console.log("123")
-                    window.location.replace("user")
+            $.post("/put_data",{"myimg":face_data},function (info){
+                if (info.result === "true"){
+                    console.log("123");
+                    window.location.replace("user");
+                }
             })
-
-
 
         }
 

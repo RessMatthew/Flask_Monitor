@@ -169,9 +169,10 @@ def face_recognize():
         if score>90:
             print("true")
             session["user_status"] = "true"
-            return render_template('videoCamera.html', result = "true")
+            return {"result":"true"}
         else:
             print("false")
+            return {"result":"false"}
 
     return render_template("videoCamera.html")
 
