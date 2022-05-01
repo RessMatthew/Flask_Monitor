@@ -11,8 +11,45 @@ body {
     justify-content: center;
     align-items: center;
     /*渐变背景*/
-    background: linear-gradient(200deg, #f3e7e9, #e3eeff);
+   /* background: linear-gradient(200deg, #f3e7e9, #e3eeff);*/
+    background: url(../images/background_1.jpg)  no-repeat center 0px;
+    background-size: cover;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+
+
 }
+
+.logo img{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    /*background-color: dodgerblue;*/
+}
+
+/*.images{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -10;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    !*zoom: 1;*!
+}*/
+
+
 
 .container {
     background-color: #fff;
@@ -27,7 +64,8 @@ body {
     position: absolute;
     top: -10%;
     left: 5%;
-    background-color: #d3b7d8;
+    /*background-color: #d3b7d8;*/
+    background-color:#01AAED;
     width: 320px;
     height: 500px;
     border-radius: 5px;
@@ -39,6 +77,9 @@ body {
     transition: 0.5s ease-in-out;
     transform: translateX(0%);
 }
+
+
+
 
 .register-box,
 .login-box {
@@ -107,7 +148,7 @@ input:focus::placeholder {
 }
 
 .form-box button:hover {
-    background-color: #a262ad;
+    background-color: #AAAAAA;
     color: #f6f6f6;
     transition: background-color 0.5s ease;
 }
@@ -149,7 +190,7 @@ input:focus::placeholder {
     text-align: center;
 }
 
-.con-box span {
+.con-box c {
     color: #d3b7d8;
 }
 
@@ -158,6 +199,7 @@ input:focus::placeholder {
     height: 150px;
     opacity: 0.9;
     margin: 40px 0;
+    background-color: dodgerblue;
 }
 
 .con-box button {
@@ -175,4 +217,121 @@ input:focus::placeholder {
 .con-box button:hoverk {
     background-color: #d3b7d8;
     color: #fff;
+}
+/*-----------------------------------------------------------------------------*/
+.tab-wrap {
+    width: 100%;
+    margin-left: 0%;
+    position: absolute;
+    display: flex;
+    top: 0px;
+
+
+}
+
+input[type=radio][name=tabs] {
+    position: absolute;
+    z-index: -1;
+}
+input[type=radio][name=tabs]:checked + .tab-label-content label {
+    color: white;
+}
+input[type=radio][name=tabs]:checked + .tab-label-content .tab-content {
+    display: block;
+}
+input[type=radio][name=tabs]:nth-of-type(1):checked ~ .slide {
+    left: calc((100% / 4) * 0);
+}
+input[type=radio][name=tabs]:nth-of-type(2):checked ~ .slide {
+    left: calc((100% / 4) * 1);
+}
+input[type=radio][name=tabs]:nth-of-type(3):checked ~ .slide {
+    left: calc((100% / 4) * 2);
+}
+input[type=radio][name=tabs]:nth-of-type(4):checked ~ .slide {
+    left: calc((100% / 4) * 3);
+}
+input[type=radio][name=tabs]:first-of-type:checked ~ .slide {
+    left: 0;
+}
+
+label {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #01AAED;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 56px;
+    transition: color 0.2s ease;
+    width: 100%;
+}
+
+.slide {
+    background: #ffeb3b;
+    width: calc(100% / 4);
+    height: 4px;
+    position: absolute;
+    left: 0;
+    top: calc(100% - 4px);
+    transition: left 0.3s ease-out;
+}
+
+.tab-label-content {
+    width: 100%;
+}
+.tab-label-content .tab-content {
+    position: absolute;
+    top: 100px;
+    /*left: 16px;*/
+    line-height: 130%;
+    display: none;
+    text-align:center;
+    vertical-align:middle;
+}
+
+@media screen and (max-width: 800px) {
+    h1 {
+        padding: 40px 0 90px 10%;
+    }
+
+    .tab-wrap {
+        width: 80%;
+        margin-left: 10%;
+        top: -106px;
+    }
+}
+.follow {
+    width: 42px;
+    height: 42px;
+    border-radius: 50px;
+    background: #03A9F4;
+    display: block;
+    margin: 300px auto 0;
+    white-space: nowrap;
+    padding: 13px;
+    box-sizing: border-box;
+    color: white;
+    transition: all 0.2s ease;
+    font-family: Roboto, sans-serif;
+    text-decoration: none;
+    box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.follow i {
+    margin-right: 20px;
+    transition: margin-right 0.2s ease;
+}
+.follow:hover {
+    width: 134px;
+}
+.follow:hover i {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .follow {
+        margin: 400px auto 0;
+    }
 }
