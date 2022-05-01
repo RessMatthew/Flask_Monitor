@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>main</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/css/view.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<!--     <link rel="stylesheet" type="text/JavaScript" href="../static/js/jquery-3.5.1.js">-->
+<script type="text/JavaScript" src="{{ url_for('static',filename='/js/jquery-3.5.1.js') }}"></script>
+
+</head>
+
+<body class="layui-layout-body"  >
+
+
+<div class="layui-layout layui-layout-admin">
+
+    <div class="layui-header">
+        <div class="layui-logo"><i class="layui-icon" >&#xe65d;</i>  宿舍监控管理系统</div>
+
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item" >
+                <a href="javascript:;" name="side"><i class="layui-icon">&#xe668;</i></a>
+            </li>
+        </ul>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="/main"><i class="layui-icon" style="font-size: 20px;">&#xe68e;</i>&nbsp home</a></li>
+
+            <li class="layui-nav-item"><a href="/exit"><i class="layui-icon" style="font-size: 15px; color: #1E9FFF;">&#xe682;</i>退出</a></li>
+        </ul>
+    </div>
+{#侧边栏#}
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a  href="login"><i class="layui-icon" >&#xe68e;</i>  <span>查看宿舍</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="weather"><i class="layui-icon" >&#xe68c;</i>  <span>宿舍状态</span></a></dd>
+{#                        <dd><a href="roomstatus"><i class="layui-icon" >&#xe68c;</i>  <span>宿舍状态</span></a></dd>#}
+{#                        <dd><a href="#"><i class="layui-icon" >&#xe613;</i>  <span>宿舍成员</span></a></dd>#}
+{#                       <dd><a href="records"><i class="layui-icon" >&#xe6ed;</i>  <span>监控记录</span></a></dd>#}
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="#"><i class="layui-icon" >&#xe665;</i>  <span>设备管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="viewMonitor"><i class="layui-icon" >&#xe6af;</i>  <span>查看监控</span></a></dd>
+{#                        <dd><a href="#"><i class="layui-icon" >&#xe654;</i>  <span>新增设备</span></a></dd>#}
+                    </dl>
+                </li>
+
+{#                <li class="layui-nav-item"><a href="#"><i class="layui-icon" >&#xe615;</i>  <span>信息查询</span></a></li>#}
+{#                <li class="layui-nav-item">#}
+{#                    <a href="personInfo">#}
+{#                        <i class="layui-icon" >&#xe66f;</i>  #}
+{#                        <span>个人信息</span></a>#}
+{#                </li>#}
+
+            </ul>
+        </div>
+    </div>
+{#用户信息#}
+    <div class="container__user">
+            <div class="div-inline">
+            <div class="img__circle">
+                <img class="user_img" src="../static/images/quin.jpg">
+            </div>
+
+            </div>
+            <div class="div-inline">
+                <div class="user_info">
+              <table width="100%" cellspacing="40" cellpadding="0">
+                     <tr>
+                         <td>铁三舍</td>
+
+                         <td>宠物小精灵</td>
+                     </tr>
+                     <tr>
+                         <td>软件2002，2003</td>
+
+                         <td>Hi,欢迎使用智能宿舍监控</td>
+                     </tr>
+
+                 </table>
+                    </div>
+            </div>
+        </div>
+{#宿舍状态#}
+    <div class="container__status">
+            <div class="container__form">
+
+            <form action="updateStatus" class="form" id="form1" method="post">
+                <h2 class="form__title">宿舍状态</h2>
+
+
+{#                <span>#}
+{#                <img src="../static/images/room.png" class="img">:<input type="text" name="roomId" id="roomId" placeholder="{{roomstatus.roomid}}" class="input" />#}
+{#                <img src="../static/images/thermometer.png" class="img">:<input type="text" name="temperature" id="temperature" placeholder="{{roomstatus.temperature}}" class="input" />#}
+{#                <img src="../static/images/moisture.png">:<input type="text" name="moisture" id="moisture" placeholder="{{roomstatus.moisture}}" class="input" />#}
+{#                <img src="../static/images/door.png">:<input type="text"  name="door" id="door" placeholder="{{roomstatus.door}}" class="input" />#}
+{#                <img src="../static/images/electricity.png">:<input type="text" name="electricity" id="electricity" placeholder="{{roomstatus.electricity}}" class="input" />#}
+{#                    <input type="button" onclick="viewVideo()" class="btn" value="查看监控"/>#}
+{#                </span>#}
+<!--                <ul>-->
+<!--                    <li>宿舍成员</li>-->
+<!--                    {% for user in uList %}-->
+<!--                    <li>{{user.username}}</li>-->
+<!--                    {% endfor %}-->
+<!--                </ul>-->
+
+            </form>
+        </div>
+        </div>
+{#宿舍成员#}
+    <div class="container__roomates">
+        <h2 class="rm__title" align="center">宿舍成员</h2>
+        <div class="rm__info">
+        <div class="rm-inline">
+            <div class="rm__img__circle">
+                <img class="user_img" src="../static/images/quin1.jpg">
+            </div>
+            <div class="rm__name">
+                <a href="#">皮卡丘</a>
+            </div>
+        </div>
+        <div class="rm-inline">
+            <div class="rm__img__circle">
+                <img class="user_img" src="../static/images/quin2.jpg">
+            </div>
+            <div class="rm__name">
+                <a href="#">杰尼龟</a>
+            </div>
+        </div>
+            <div class="rm-inline">
+            <div class="rm__img__circle">
+                <img class="user_img" src="../static/images/quin3.jpg">
+            </div>
+                <div class="rm__name">
+                <a href="#">可达鸭</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function viewVideo() {
+           window.location.href = "video";
+        }
+    </script>
+</div>
+
+
+<div class="layui-footer">
+    <div class="section"><p><sub>Copyright <a href="http://www.csu.edu.cn">Central South University</a> </sub></p></div>
+</div>
+
+<script src="../static/layui/layui.js"></script>
+
+
+</body>
+</html>
