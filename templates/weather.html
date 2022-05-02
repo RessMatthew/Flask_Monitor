@@ -11,12 +11,40 @@
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 
 <script type="text/JavaScript" src="{{ url_for('static',filename='/js/jquery-3.5.1.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='live2d/css/live2d.css') }}"/>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='live2d/js/jquery.js') }}"></script>
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="{{ url_for('static', filename='live2d/js/live2dcubismcore.js') }}"></script>
+  <!-- Build script -->
+  <script src="{{ url_for('static', filename='live2d/js/bundle.js') }}"></script>
 
 </head>
 
 <body class="layui-layout-body"  >
-
-
+ <div class="live2d-main">
+        <div class="live2d-tips"></div>
+        <!-- 这里可以定义画布的大小位置 -->
+        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+        <div class="tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='live2d/js/message.js') }}"></script>
+    <script type="text/javascript">
+      var resourcesPath = 'static/live2d/model/';  // 指定资源文件（模型）保存的路径
+      var backImageName = ''; // 指定背景图片
+      var modelDir = '虚拟形象';  // 指定需要加载的模型
+      init();  // 初始化模型，属于message.js文件
+    </script>
 <div class="layui-layout layui-layout-admin">
 
     <div class="layui-header">
@@ -43,6 +71,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a  href="login"><i class="layui-icon" >&#xe68e;</i>  <span>查看宿舍</span></a>
                     <dl class="layui-nav-child">
+                        <dd><a href="userInfo"><i class="layui-icon" >&#xe68c;</i>  <span>用户信息</span></a></dd>
                         <dd><a href="weather"><i class="layui-icon" >&#xe68c;</i>  <span>宿舍状态</span></a></dd>
 {#                        <dd><a href="roomstatus"><i class="layui-icon" >&#xe68c;</i>  <span>宿舍状态</span></a></dd>#}
 {#                        <dd><a href="#"><i class="layui-icon" >&#xe613;</i>  <span>宿舍成员</span></a></dd>#}
@@ -69,7 +98,8 @@
     </div>
 
 {#监控信息#}
-    <div class="container__monitor">
+
+        <div class="user-box">
         <form action="#" class="form" id="form1" method="post">
             <h2 class="form__title">宿舍状态</h2>
             <span>
@@ -94,17 +124,9 @@
             </span>
 {#                <input type="button" onclick="update()" class="btn" value="保存修改"/>#}
             </form>
-    </div>
+            </div>
 
-{#    <div class="container__monitor">#}
-{#        <h1>#}
-{#            当前温度：{{ temperature }}#}
-{#        </h1>#}
-{#        <br>#}
-{#        <h1>#}
-{#            当前湿度：{{ humidity }}#}
-{#        </h1>#}
-{#    </div>#}
+</div>
 
 
     <script type="text/javascript">
@@ -113,7 +135,6 @@
         }
     </script>
 
-</div>
 
 <div class="layui-footer">
     <div class="section"><p><sub>Copyright <a href="http://www.csu.edu.cn">Central South University</a> </sub></p></div>
@@ -124,3 +145,120 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+{#<div class="layui-layout layui-layout-admin">#}
+{##}
+{#    <div class="layui-header">#}
+{#        <div class="layui-logo"><i class="layui-icon" >&#xe65d;</i>  宿舍监控管理系统</div>#}
+{##}
+{#        <ul class="layui-nav layui-layout-left">#}
+{#            <li class="layui-nav-item" >#}
+{#                <a href="javascript:;" name="side"><i class="layui-icon">&#xe668;</i></a>#}
+{#            </li>#}
+{#        </ul>#}
+{##}
+{#        <ul class="layui-nav layui-layout-right">#}
+{#            <li class="layui-nav-item"><a href="/main"><i class="layui-icon" style="font-size: 20px;">&#xe68e;</i>&nbsp home</a></li>#}
+{##}
+{#            <li class="layui-nav-item"><a href="/exit"><i class="layui-icon" style="font-size: 15px; color: #1E9FFF;">&#xe682;</i>退出</a></li>#}
+{#        </ul>#}
+{#    </div>#}
+{##}
+{#侧边栏#}
+{#    <div class="layui-side layui-bg-black">#}
+{#        <div class="layui-side-scroll">#}
+{#            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->#}
+{#            <ul class="layui-nav layui-nav-tree"  lay-filter="test">#}
+{#                <li class="layui-nav-item layui-nav-itemed">#}
+{#                    <a  href="login"><i class="layui-icon" >&#xe68e;</i>  <span>查看宿舍</span></a>#}
+{#                    <dl class="layui-nav-child">#}
+{#                        <dd><a href="userInfo"><i class="layui-icon" >&#xe68c;</i>  <span>用户信息</span></a></dd>#}
+{#                        <dd><a href="weather"><i class="layui-icon" >&#xe68c;</i>  <span>宿舍状态</span></a></dd>#}
+{#                        <dd><a href="roomstatus"><i class="layui-icon" >&#xe68c;</i>  <span>宿舍状态</span></a></dd>#}
+{#                        <dd><a href="#"><i class="layui-icon" >&#xe613;</i>  <span>宿舍成员</span></a></dd>#}
+{#                       <dd><a href="records"><i class="layui-icon" >&#xe6ed;</i>  <span>监控记录</span></a></dd>#}
+{#                    </dl>#}
+{#                </li>#}
+{#                <li class="layui-nav-item layui-nav-itemed">#}
+{#                    <a href="#"><i class="layui-icon" >&#xe665;</i>  <span>设备管理</span></a>#}
+{#                    <dl class="layui-nav-child">#}
+{#                        <dd><a href="put_data"><i class="layui-icon" >&#xe6af;</i>  <span>查看监控</span></a></dd>#}
+{#                        <dd><a href="#"><i class="layui-icon" >&#xe654;</i>  <span>新增设备</span></a></dd>#}
+{#                    </dl>#}
+{#                </li>#}
+{##}
+{#                <li class="layui-nav-item"><a href="#"><i class="layui-icon" >&#xe615;</i>  <span>信息查询</span></a></li>#}
+{#                <li class="layui-nav-item">#}
+{#                    <a href="personInfo">#}
+{#                        <i class="layui-icon" >&#xe66f;</i>  #}
+{#                        <span>个人信息</span></a>#}
+{#                </li>#}
+{##}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#监控信息#}
+{#    <div class="container__monitor">#}
+{#        <form action="#" class="form" id="form1" method="post">#}
+{#            <h2 class="form__title">宿舍状态</h2>#}
+{#            <span>#}
+{#                <img src="../static/images/room.png" class="img">:#}
+{#                <input type="text" name="roomId" id="roomId" placeholder="铁三225" class="input" />#}
+{#            </span>#}
+{#            <span>#}
+{#                <img src="../static/images/thermometer.png" class="img">:#}
+{#                <input type="text" name="temperature" id="temperature" placeholder={{ temperature }} class="input" />#}
+{#            </span>#}
+{#            <span>#}
+{#                <img src="../static/images/moisture.png">:#}
+{#                <input type="text" name="moisture" id="moisture" placeholder={{ humidity }} class="input" />#}
+{#            </span>#}
+{#            <span>#}
+{#                <img src="../static/images/door.png">:#}
+{#                <input type="text"  name="door" id="door" placeholder="close" class="input" />#}
+{#            </span>#}
+{#            <span>#}
+{#                <img src="../static/images/electricity.png">:#}
+{#                <input type="text" name="electricity" id="electricity" placeholder="on" class="input" />#}
+{#            </span>#}
+{#                <input type="button" onclick="update()" class="btn" value="保存修改"/>#}
+{#            </form>#}
+{#    </div>#}
+{##}
+{#    <div class="container__monitor">#}
+{#        <h1>#}
+{#            当前温度：{{ temperature }}#}
+{#        </h1>#}
+{#        <br>#}
+{#        <h1>#}
+{#            当前湿度：{{ humidity }}#}
+{#        </h1>#}
+{#    </div>#}
+{##}
+{##}
+{#    <script type="text/javascript">#}
+{#        function viewVideo() {#}
+{#           window.location.href = "video";#}
+{#        }#}
+{#    </script>#}
+{##}
+{#</div>#}
+{##}
+{#<div class="layui-footer">#}
+{#    <div class="section"><p><sub>Copyright <a href="http://www.csu.edu.cn">Central South University</a> </sub></p></div>#}
+{#</div>#}
+{##}
+{#<script src="../static/layui/layui.js"></script>#}
+{##}
+{##}
+{#</body>#}
+{#</html>#}

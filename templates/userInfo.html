@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>userinformtion</title>
+    <link rel="stylesheet" href="../static/css/userInfo.css">
+</head>
+<body>
+
+<div class="user-from-box">
+    <div class="user-box">
+    <form method="post"  class="user-info"  action="{{ url_for('user_edit') }}">
+
+    <h1>
+        用户信息
+    </h1>
+
+        <table style="text-align:center;vertical-align:middle;">
+
+            <div >
+
+                <img class="img__circle" src="../static/images/quin.jpg">
+
+            </div>
+
+
+            <div ><span>姓名：</span>
+{#                <input type="text"   readonly="readonly"  value="王小美" name = 'username' placeholder="用户名">#}
+                <input type="text"   readonly="readonly"  value="{{ username }}" name = 'username'></td>
+            </div>
+
+            <div><span>性别：</span>
+
+                <select id="group" value="1">
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+
+            <div><span>年龄：</span>
+                <input type="text"     value="20" name = 'age' >
+            </div>
+
+            <div><span>邮箱：</span>
+                <input type="text"     value="{{ email }}" name = 'email'>
+{#                <input type="text"     value="8402200326@csu.cn" name = 'email'>#}
+            </div>
+
+            <div><span>QQ：</span>
+                <input type="text"     value="16202789" name = 'qq'>
+            </div>
+
+            <div><span>微信：</span>
+                <input type="text"     value="8204202626@csu.cn" name = 'wechat'>
+            </div>
+
+             <div><span>密码：</span>
+                <input type="password" value="{{ password }}"    name = 'password'>
+            </div>
+
+             <div><span>确认密码：</span>
+                <input type="password" value="{{ passwordrpt }}" name = 'passwordrpt'>
+            </div>
+
+            <div style="width: 100%;height: 100px;text-align:center;">
+                <button type="submit" style="width: 200px;">提交修改</button>
+{#                <button type="submit" style="width: 200px;">保存修改</button>#}
+                <button type="submit" style="width:200px;">人脸认证</button>
+                <button type="submit" style="width:200px;">暂无功能</button>
+            </div>
+
+
+        </table>
+
+
+
+        <div>
+
+        </div>
+
+
+
+    </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+{# <html lang="zh-CN">#}
+{##}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta http-equiv="X-UA-Compatible" content="IE=edge">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">#}
+{#    <title>userinformtion</title>#}
+{#    <link rel="stylesheet" href="../static/css/userInfo.css">#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<div class="user-box">#}
+{#    <form method="post"  class="user-info" action="{{ url_for('user_edit') }}">#}
+{#    <form method="post" action="{{ url_for('user_edit') }}">#}
+{#    <h1>#}
+{#        用户信息#}
+{#    </h1>#}
+{##}
+{#        {% for message in get_flashed_messages() %}#}
+{#        <div class=flash>{{ message }}</div>#}
+{#         {% endfor %}#}
+{##}
+{#        <table style="text-align:center;vertical-align:middle;">#}
+{##}
+{#            <div >#}
+{##}
+{#                <img class="img__circle" src="../static/images/quin.jpg">#}
+{##}
+{#            </div>#}
+{##}
+{##}
+{#            <div ><span>姓名：</span>#}
+{#                <td><input type="text"   readonly="readonly"  value="{{ username }}" name = 'username'></td>#}
+{#                <input type="text"   readonly="readonly"  value="王小美" name = 'username' placeholder="用户名">#}
+{#            </div>#}
+{##}
+{#            <div><span>性别：</span>#}
+{##}
+{#                <select id="group" value="1">#}
+{#                    <option value="1">男</option>#}
+{#                    <option value="2">女</option>#}
+{#                </select>#}
+{#            </div>#}
+{##}
+{#            <div><span>年龄：</span>#}
+{#                <input type="text"     value="20" name = 'age' >#}
+{#            </div>#}
+{##}
+{#            <div><span>邮箱：</span>#}
+{#                 <td><input type="text"     value="{{ email }}" name = 'email'></td>#}
+{#                <input type="text"     value="8402200326@csu.cn" name = 'email'>#}
+{#            </div>#}
+{##}
+{#            <div><span>QQ：</span>#}
+{#                <input type="text"     value="16202789" name = 'qq'>#}
+{#            </div>#}
+{##}
+{#            <div><span>微信：</span>#}
+{#                <input type="text"     value="8204202626@csu.cn" name = 'wechat'>#}
+{#            </div>#}
+{##}
+{#            <tr>#}
+{#                <button type="submit">提交</button>#}
+{#            </tr>#}
+{##}
+{#            <div style="width: 100%;height: 100px;text-align:center;">#}
+{#                <button type="submit" style="width: 200px;">保存修改</button>#}
+{#                <button type="submit" style="width:200px;">人脸认证</button>#}
+{#                <button type="submit" style="width:200px;">暂无功能</button>#}
+{#            </div>#}
+{##}
+{##}
+{#        </table>#}
+{#    </form>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{##}
+{#</body>#}
+{#</html>#}

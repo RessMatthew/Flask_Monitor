@@ -136,9 +136,12 @@ def user_edit():
         return render_template('user.html')
     else:
         #更新数据库
-        user = User.query.filter(User.username==username).update({'password': password,'email':email})
+        User.query.filter(User.username==username).update({'password': password,'email':email})
         db.session.commit()
-        return render_template('index.html')
+        user = User.query.filter(User.username == username).first()
+        u = user.model2dict()
+        session['user'] = u
+        return render_template('main.html')
 
 # 这是新增的live2d功能
 @app.route("/live2d", methods=["POST", "GET"])
@@ -163,6 +166,18 @@ def main():
 @app.route('/viewMonitor')
 def view_monitor():
     return render_template('index.html')
+
+@app.route('/userInfo')
+def userInfo():
+    if "user_status" in session:
+        user = session['user']
+        return render_template('userInfo.html',
+                               username=user['username'],
+                               password=user['password'],
+                               email=user['email'],
+                               passwordrpt=user['password']
+                               )
+
 
 #当陌生人闯入宿舍时发送短信
 @app.route('/sendErrorMessage')
