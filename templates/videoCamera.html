@@ -11,8 +11,9 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
 </head>
 <body>
-    <video width="300" height="300" id = "myvideo"></video>
-    <canvas width="300" height="300" id = "canvas"></canvas>    <!--画布-->
+    <canvas width="300" height="300" id = "canvas">
+              <video width="300" height="300" id = "myvideo"></video>
+      </canvas>    <!--画布-->   <!--画布-->
     <!--canvas不能用CSS修饰，用CSS修饰宽高只是拉伸，并没有对内容进行适应-->
     <br>
     <button onclick = "openCamera()">打开摄像头</button>
