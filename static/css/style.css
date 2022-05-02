@@ -151,7 +151,7 @@
     border-radius: var(--button-radius);
     margin: 0 auto;
     margin-top: 30px;
-    max-width: 400px;
+    max-width: 800px;
     overflow: hidden;
     position: center;
     width: 100%;
@@ -313,7 +313,7 @@
 	border: none;
 	padding: 0.9rem 0.9rem;
 	margin: 0.5rem 0;
-	width: 50px;
+	width: 60px;
 	vertical-align:middle;
 
 }

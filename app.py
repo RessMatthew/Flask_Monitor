@@ -11,6 +11,7 @@ import sendMessage
 from camera import VideoCamera
 from faceRecogniction import recognize
 
+count = 10
 app = Flask(__name__)
 
 #设置SECRET_KEY
@@ -22,7 +23,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
 # 本地配置
 username = 'root'
-password = '2003052288mjp'
+password = 'xiewantong.123'
 ip = 'localhost'
 port = '3306'
 database = "flask_sql"
@@ -148,8 +149,8 @@ def live2d():
 @app.route('/')
 def index():
     # 如果用户登录了就转到主页面，用户没有登录就转到login页面
-    if "user_status" in session:
-        return render_template('index.html')
+    # if "user_status" in session:
+    #     return render_template('index.html')
     return render_template('login.html')
 
 @app.route('/main')
@@ -189,6 +190,11 @@ def face_recognize():
             return {"result":"true"}
         else:
             print("false")
+            global count
+            count += 1
+            if (count > 10):
+                count = 0
+                sendMessage.sendMES("【警告!!!】有陌生人闯入寝室，请及时查看监控，以防财产损失")
             return {"result":"false"}
 
     return render_template("videoCamera.html")
