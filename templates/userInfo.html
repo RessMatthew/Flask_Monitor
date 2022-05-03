@@ -68,8 +68,8 @@
             <div style="width: 100%;height: 100px;text-align:center;">
                 <button type="submit" style="width: 200px;">提交修改</button>
 {#                <button type="submit" style="width: 200px;">保存修改</button>#}
-                <button type="submit" style="width:200px;">人脸认证</button>
-                <button type="submit" style="width:200px;">暂无功能</button>
+                <button type="button" style="width:200px;" id = "store_face">人脸认证</button>
+                <button type="button" style="width:200px;">暂无功能</button>
             </div>
 
 
@@ -86,7 +86,67 @@
     </form>
     </div>
 </div>
+<div id="face">
+    <canvas  width="300" height="300" id = "face_recognize">
+        <video  width="300" height="300" id = "userVideo"></video>
+    </canvas>    <!--画布-->
+</div>
+    <script>
+        var faceButton = document.getElementById("store_face");
+        faceButton.onclick = function (){
+            openCamera();
+        }
+        userVideo = document.getElementById("userVideo")        /* 通过id取出userVideo元素*/
+        function openCamera(){
+            cons = {
+                video:{
+                    width:300,
+                    height:300
+                }
+            }
+            /* 取电脑的摄像头*/
+            video = navigator.mediaDevices.getUserMedia(cons)
+            /* 将userVideo标签与硬件摄像头相关联*/
+            video.then(
+                function (videoStream){
+                    userVideo.srcObject = videoStream
+                    userVideo.play()  /*play() 方法开始播放当前的音频或视频。*/
+                }
+            )
+        }
 
+        var flag=0;
+        sum();
+        function sum()
+        {
+            if(flag<1000){
+                takePhoto();
+                flag++;
+            }else{
+                return false;
+            }
+    //				setTimeout中函数不能有参数，可用function(){}
+    //				setTimeout(function(){sum()},1000);
+            setTimeout(sum,50);
+        }
+
+        function takePhoto(){
+            canvas = document.getElementById("face_recognize")
+            context  = canvas.getContext("2d")  /* 画2d平面图*/
+            context.drawImage(userVideo,0,0,300,300)  /* 图片，x，y，宽，高*/
+            /* 用jquery的ajax技术实现前后端的通信*/
+            face_data = canvas.toDataURL()      /* 把canvas里的图打印成数据*/
+            face_data = face_data.substring(22)     /* 因为前22位数字是描述信息，不必上传*/
+            /* data:image/png;base64,*/
+            $.post("/store_face",{"user_img":face_data},function (info){
+                if (info.result === "true"){
+
+                    console.log("123");
+                    window.location.replace("main");
+                }
+            })}
+
+    </script>
 
 
 </body>

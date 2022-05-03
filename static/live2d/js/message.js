@@ -43,6 +43,7 @@ $('.tool .fui-home').click(function (){
 });
 
 $('.tool .fui-eye').click(function (){
+
   showMessage('2', 5000, true)
 });
 
