@@ -51,11 +51,13 @@
       <!-- 注册 开始 -->
       <div class="register-box ">
         <h1>register</h1>
-        <input type="text" id="username2" placeholder="用户名" />
-        <input type="email" id="email" placeholder="邮箱" />
-        <input type="password" id="password2" placeholder="密码" />
-        <input type="password" id="password3" placeholder="确认密码" />
-        <button id="submit_register" >注册</button>
+        <form method="post" action="{{ url_for('register') }}">
+            <input type="text" id="username2" placeholder="用户名" name = 'username'/>
+            <input type="email" id="email" placeholder="邮箱" name = 'email' />
+            <input type="password" id="password2" placeholder="密码"  name = 'password' />
+            <input type="password" id="password3" placeholder="确认密码" name = 'confirmPassword' />
+            <button id="submit_register" >注册</button>
+        </form>
       </div>
       <!-- 注册 结束 -->
 

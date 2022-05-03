@@ -110,7 +110,7 @@ def register():
             insert = User(username=user,password=password,email=email)
             db.session.add(insert)
             db.session.commit()
-            return render_template('user.html')
+            return render_template('login.html')
 
 #天气模块
 @app.route('/weather')
