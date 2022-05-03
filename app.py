@@ -123,6 +123,15 @@ def weather():
 
    return render_template('weather.html',humidity=humidity,temperature=temperature)
 
+
+@app.route('/wangguijie')
+def wangguijie():
+   return render_template('personal.html')
+
+@app.route('/majunpeng')
+def majunpeng():
+   return render_template('personal2.html')
+
 #用户编辑信息
 @app.route('/user_edit',methods = ['POST'])
 def user_edit():
