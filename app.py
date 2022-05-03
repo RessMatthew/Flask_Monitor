@@ -23,7 +23,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
 # 本地配置
 username = 'root'
-password = 'xiewantong.123'
+password = '2003052288mjp'
 ip = 'localhost'
 port = '3306'
 database = "flask_sql"
@@ -82,7 +82,7 @@ def login():
         # 查询表里面名字等于username的
         user = User.query.filter(User.username == username).first()
         if user.password == password:
-            u = user.model2dict();
+            u = user.model2dict()
             session['user'] = u
             return render_template("main.html")
         else :
@@ -161,8 +161,8 @@ def live2d():
 @app.route('/')
 def index():
     # 如果用户登录了就转到主页面，用户没有登录就转到login页面
-    # if "user_status" in session:
-    #     return render_template('index.html')
+    if "user_status" in session:
+        return render_template('main.html')
     return render_template('login.html')
 
 @app.route('/main')
@@ -206,11 +206,16 @@ def face_recognize():
             f.write(img_base64_data)
         user_face = "D:/face_recognize/pic/user_face.png"
         local_face = "D:/face_recognize/pic/local_face.png"
+
         rec = recognize()
         score = rec.analyse_img(file1 = user_face,file2 = local_face)
         if score>90:
             print("true")
             session["user_status"] = "true"
+            username = "admin"
+            user = User.query.filter(User.username == username).first()
+            u = user.model2dict()
+            session['user'] = u
             return {"result":"true"}
         else:
             print("false")
@@ -222,6 +227,22 @@ def face_recognize():
             return {"result":"false"}
 
     return render_template("videoCamera.html")
+
+@app.route('/store_face')
+def store_face():
+    if request.method == "POST":
+        imgData = request.form.get("user_img")
+        # 因为imgData是base64的数据，要把它转为ndarray
+        # 用face-recognition读取外部图片，读取后的格式就是ndarray
+        # 这样先将base64解码，存成一个图片
+        img_base64_data = base64.b64decode(imgData)
+        with open("D:/face_recognize/pic/user_face2.png", "wb") as f:
+            f.write(img_base64_data)
+        flash("人脸认证成功！")
+        return {"result": "true"}
+
+    return render_template("videoCamera.html")
+
 
 @app.route('/video_feed')
 def video_feed():
