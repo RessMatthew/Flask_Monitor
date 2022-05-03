@@ -23,7 +23,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
 
 # 本地配置
 username = 'root'
-password = '2003052288mjp'
+password = 'xiewantong.123'
 ip = 'localhost'
 port = '3306'
 database = "flask_sql"
@@ -131,6 +131,10 @@ def wangguijie():
 @app.route('/majunpeng')
 def majunpeng():
    return render_template('personal2.html')
+
+@app.route('/takePhoto')
+def takePhoto():
+   return render_template('takePhoto.html')
 
 #用户编辑信息
 @app.route('/user_edit',methods = ['POST'])

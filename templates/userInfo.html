@@ -1,12 +1,17 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>userinformtion</title>
     <link rel="stylesheet" href="../static/css/userInfo.css">
+    <meta charset="UTF-8">
+    <title>videoCamera</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 
@@ -66,34 +71,34 @@
             </div>
 
             <div style="width: 100%;height: 100px;text-align:center;">
-                <button type="submit" style="width: 200px;">提交修改</button>
+                <button type="submit" style="width: 200px;">保存信息</button>
 {#                <button type="submit" style="width: 200px;">保存修改</button>#}
-                <button type="button" style="width:200px;" id = "store_face">人脸认证</button>
-                <button type="button" style="width:200px;">暂无功能</button>
+                <button type="button" style="width:200px;" id = "store_face">人脸信息</button>
             </div>
-
+            <div id="face">
+                <canvas  width="300" height="300" id = "face_recognize">
+                    <video  width="300" height="300" id = "userVideo"></video>
+                </canvas>    <!--画布-->
+            </div>
 
         </table>
 
 
 
-        <div>
 
-        </div>
 
 
 
     </form>
     </div>
 </div>
-<div id="face">
-    <canvas  width="300" height="300" id = "face_recognize">
-        <video  width="300" height="300" id = "userVideo"></video>
-    </canvas>    <!--画布-->
-</div>
+
     <script>
+
+        {#document.getElementById("#face").style.display="none";#}
         var faceButton = document.getElementById("store_face");
         faceButton.onclick = function (){
+            {#document.getElementById("#face").style.display="block";#}
             openCamera();
         }
         userVideo = document.getElementById("userVideo")        /* 通过id取出userVideo元素*/

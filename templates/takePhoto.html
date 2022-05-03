@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>videoCamera</title>
+    <style>
+        video,canvas{
+            border:2px solid blue;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/css/view.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+<script type="text/JavaScript" src="{{ url_for('static',filename='/js/jquery-3.5.1.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='live2d/css/live2d.css') }}"/>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='live2d/js/jquery.js') }}"></script>
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="{{ url_for('static', filename='live2d/js/live2dcubismcore.js') }}"></script>
+  <!-- Build script -->
+  <script src="{{ url_for('static', filename='live2d/js/bundle.js') }}"></script>
+</head>
+<body>
+    <div class="container__monitor">
+
+
+    <canvas width="800" height="450" id = "canvas">
+          <video width="800" height="450" id = "myvideo"></video>
+    </canvas>    <!--画布-->   <!--画布-->
+    <!--canvas不能用CSS修饰，用CSS修饰宽高只是拉伸，并没有对内容进行适应-->
+    <br>
+    <script>
+        openCamera();
+        myvideo = document.getElementById("myvideo")        /* 通过id取出myvideo元素*/
+        function openCamera(){
+            cons = {
+                video:{
+                    width:800,
+                    height:450
+                }
+            }
+            /* 取电脑的摄像头*/
+            video = navigator.mediaDevices.getUserMedia(cons)
+            /* 将myvideo标签与硬件摄像头相关联*/
+            video.then(
+                function (videoStream){
+                    myvideo.srcObject = videoStream
+                    myvideo.play()  /*play() 方法开始播放当前的音频或视频。*/
+                }
+            )
+        }
+
+        var flag=0;
+        sum();
+        function sum()
+        {
+            if(flag<1000){
+                takePhoto();
+                flag++;
+            }else{
+                return false;
+            }
+//				setTimeout中函数不能有参数，可用function(){}
+//				setTimeout(function(){sum()},1000);
+            setTimeout(sum,50);
+        }
+
+        function takePhoto(){
+            canvas = document.getElementById("canvas")
+            context  = canvas.getContext("2d")  /* 画2d平面图*/
+            context.drawImage(myvideo,0,0,800,450)  /* 图片，x，y，宽，高*/
+            /* 用jquery的ajax技术实现前后端的通信*/
+            face_data = canvas.toDataURL()      /* 把canvas里的图打印成数据*/
+            face_data = face_data.substring(22)     /* 因为前22位数字是描述信息，不必上传*/
+            /* data:image/png;base64,*/
+            $.post("/put_data",{"myimg":face_data},function (info){
+                if (info.result === "true"){
+                    console.log("123");
+                    /* window.alert("识别成功");*/
+                    window.location.replace("main");
+                }
+            })
+
+        }
+
+    </script>
+
+</div>
+
+</body>
+</html>

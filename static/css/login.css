@@ -65,7 +65,7 @@ body {
     top: -10%;
     left: 5%;
     /*background-color: #d3b7d8;*/
-    background-color:#01AAED;
+    background-color:#2DBBBF;
     width: 320px;
     height: 500px;
     border-radius: 5px;
@@ -258,7 +258,7 @@ input[type=radio][name=tabs]:first-of-type:checked ~ .slide {
 label {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.8);
-    background-color: #01AAED;
+    background-color: #2DBBBF;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
